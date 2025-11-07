@@ -1,0 +1,35 @@
+# Python / Django
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.env
+*.log
+
+# Virtual environment
+venv/
+env/
+
+# Django migrations (optional, sometimes you want to commit)
+**/migrations/*.pyc
+**/migrations/__pycache__/
+
+# Node / React
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.env
+
+# Build output
+build/
+dist/
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
