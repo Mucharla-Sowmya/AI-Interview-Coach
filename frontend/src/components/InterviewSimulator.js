@@ -88,7 +88,7 @@ export default function InterviewSimulator() {
       setScore(null);
     } catch (error) {
       console.error("❌ Error generating question:", error);
-      alert("⚠️ Error generating question. Check backend connection or token.");
+      alert("⚠️ Session expired. Please re-login.");
     } finally {
       setLoading(false);
     }
@@ -188,26 +188,39 @@ export default function InterviewSimulator() {
         )}
 
         {/* Question Section */}
-        {!loading && question && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            ref={scrollRef}
-            className="border border-white/20 bg-white/5 rounded-xl p-6 space-y-3 shadow-inner"
-          >
-            <h2 className="text-lg font-semibold text-blue-300 flex items-center gap-2">
-              <FaPaperPlane className="text-blue-400" />
-              <span>Interview Question</span>
-            </h2>
+{!loading && question && (
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    animate={{ opacity: 1, y: 0 }}
+    ref={scrollRef}
+    className="border border-blue-400/30 bg-gradient-to-br from-gray-900/80 via-gray-800/70 to-blue-950/60 
+               rounded-2xl p-6 shadow-[0_0_20px_rgba(0,0,0,0.3)] space-y-4"
+  >
+    <div className="flex items-center justify-between">
+      <h2 className="text-xl font-bold text-blue-300 flex items-center gap-2">
+        <FaPaperPlane className="text-blue-400 text-2xl" />
+        <span>AI-Generated Interview Question</span>
+      </h2>
+      <span className="text-xs text-blue-200 bg-blue-900/40 px-3 py-1 rounded-full border border-blue-400/30">
+        Role: {role || "N/A"}
+      </span>
+    </div>
 
-            <div
-              className="bg-gray-800/40 rounded-lg p-4 text-gray-100 leading-relaxed space-y-3"
-              style={{ lineHeight: "1.9" }}
-            >
-              <ReactMarkdown>{question}</ReactMarkdown>
-            </div>
-          </motion.div>
-        )}
+    <div
+      className="bg-gray-900/60 border border-blue-400/20 rounded-xl p-5 shadow-inner
+                 text-gray-100 leading-relaxed prose prose-invert max-w-none
+                 prose-headings:text-blue-300 prose-code:text-yellow-300"
+      style={{ lineHeight: "1.8" }}
+    >
+      <ReactMarkdown>{question}</ReactMarkdown>
+    </div>
+
+    <div className="text-xs text-gray-400 italic text-right pt-1">
+      💡 Tip: Read the question carefully before answering.
+    </div>
+  </motion.div>
+)}
+
 
         {/* Answer Input */}
         {question && !loading && (
@@ -236,30 +249,69 @@ export default function InterviewSimulator() {
           </motion.button>
         )}
 
-        {/* Feedback Section */}
-        {!loading && feedback && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="border border-green-400/40 bg-green-900/30 rounded-xl p-5 text-green-100"
-          >
-            <h2 className="text-lg font-semibold text-green-300 flex items-center gap-2">
-              💡 Feedback
-            </h2>
-            <div className="bg-green-800/30 rounded-lg p-4 leading-relaxed">
-              <ReactMarkdown>{feedback}</ReactMarkdown>
-            </div>
+        
+          {/* Feedback Section */}
+{!loading && feedback && (
+  <motion.div
+    initial={{ opacity: 0, y: 25 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    className="relative border border-green-400/40 bg-gradient-to-br from-green-900/40 to-gray-900/60 
+               rounded-2xl p-6 shadow-xl overflow-hidden backdrop-blur-sm mt-6"
+  >
+    {/* Decorative Glow */}
+    <div className="absolute inset-0 bg-gradient-to-br from-green-600/15 to-transparent blur-3xl"></div>
 
-            {score !== null && (
-              <div className="mt-6 p-4 bg-green-800/40 border border-green-400/50 rounded-lg text-center">
-                <p className="text-2xl font-bold text-green-300 tracking-wide">
-                  🏆 Score: {score}{" "}
-                  <span className="text-green-200 text-lg">out of 10</span>
-                </p>
-              </div>
-            )}
-          </motion.div>
-        )}
+    {/* Header */}
+    <div className="relative z-10 flex items-center gap-2 mb-4">
+      <FaBrain className="text-green-400 text-xl" />
+      <h2 className="text-xl font-semibold text-green-300 tracking-wide">
+        AI Feedback & Evaluation
+      </h2>
+    </div>
+
+    {/* Feedback Text */}
+    <div
+      className="relative z-10 bg-green-950/50 border border-green-500/20 rounded-xl 
+                 p-5 text-green-100 leading-relaxed shadow-inner"
+      style={{ lineHeight: "1.9" }}
+    >
+      <div className="prose prose-invert max-w-none text-green-100">
+  <ReactMarkdown>{feedback}</ReactMarkdown>
+</div>
+
+    </div>
+
+    {/* Score Display */}
+    {score !== null && (
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="relative z-10 mt-6 p-4 bg-green-950/40 border border-green-400/50 
+                   rounded-xl text-center shadow-inner"
+      >
+        <p className="text-2xl font-bold text-green-300 tracking-wide">
+          🏆 Score: {score}{" "}
+          <span className="text-green-200 text-lg">/ 10</span>
+        </p>
+        <div className="mt-2 h-2 w-full bg-gray-700/50 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-green-500"
+            initial={{ width: 0 }}
+            animate={{ width: `${(score / 10) * 100}%` }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          />
+        </div>
+      </motion.div>
+    )}
+
+    {/* Tip */}
+    <p className="relative z-10 mt-4 text-sm text-green-200/80 italic text-center">
+      💬 Reflect on this feedback and try improving your answer structure next time.
+    </p>
+  </motion.div>
+)}
 
         {/* View History */}
         <button

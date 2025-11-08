@@ -47,7 +47,7 @@ function Register() {
 
     try {
       // ✅ 1. Register user
-        await axios.post("http://127.0.0.1:8000/api/register/", {
+        await axios.post("http://127.0.0.1:8000/api/users/register/", {
         username,
         email,
         password,
