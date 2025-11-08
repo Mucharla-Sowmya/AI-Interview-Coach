@@ -12,7 +12,6 @@ function Register() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // ✅ Password strength validation
   const checkPasswordStrength = (password) => {
     const minLength = password.length >= 8;
     const hasUpper = /[A-Z]/.test(password);
@@ -32,13 +31,11 @@ function Register() {
     e.preventDefault();
     setError("");
 
-    // ✅ Confirm password match
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
-    // ✅ Password strength check
     const pwError = checkPasswordStrength(password);
     if (pwError) {
       setError(pwError);
@@ -46,30 +43,25 @@ function Register() {
     }
 
     try {
-      // ✅ 1. Register user
-        await axios.post("http://127.0.0.1:8000/api/users/register/", {
+      await axios.post("http://127.0.0.1:8000/api/users/register/", {
         username,
         email,
         password,
       });
 
-      // ✅ 2. Log in immediately after registration using JWT endpoint
       const loginRes = await axios.post("http://127.0.0.1:8000/api/token/", {
         username,
         password,
       });
 
-      // ✅ 3. Save tokens
       localStorage.setItem("access", loginRes.data.access);
       localStorage.setItem("refresh", loginRes.data.refresh);
-      localStorage.setItem("token", loginRes.data.access); // used for PrivateRoute
+      localStorage.setItem("token", loginRes.data.access);
       localStorage.setItem("username", username);
 
-      // ✅ 4. Notify app & redirect
       window.dispatchEvent(new Event("authChange"));
       alert("✅ Registration and login successful!");
-      navigate("/"); // redirect to Interview Simulator
-
+      navigate("/");
     } catch (err) {
       console.error("Registration error:", err);
       const data = err.response?.data;
@@ -84,40 +76,40 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-blue-950 via-slate-900 to-gray-950">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="glass-card p-8 w-full max-w-md"
+        className="glass-card p-6 w-full max-w-md max-h-[85vh] overflow-hidden flex flex-col justify-center"
       >
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <motion.div
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 1.2, repeat: Infinity }}
           >
-            <FaUserPlus className="text-5xl mx-auto text-green-400 mb-2" />
+            <FaUserPlus className="text-4xl mx-auto text-green-400 mb-2" />
           </motion.div>
 
           <motion.h1
-            className="text-4xl font-extrabold text-green-400 tracking-wide"
+            className="text-3xl font-extrabold text-green-400 tracking-wide"
             animate={{ opacity: [1, 0.5, 1] }}
             transition={{ duration: 1.2, repeat: Infinity }}
           >
             Create Account
           </motion.h1>
-          <p className="text-gray-400 mt-1">
+          <p className="text-gray-400 mt-1 text-sm">
             Join the AI Interview Coach today 🚀
           </p>
         </div>
 
         {error && (
-          <p className="text-red-400 text-center font-medium mb-4">⚠️ {error}</p>
+          <p className="text-red-400 text-center font-medium mb-4 text-sm">⚠️ {error}</p>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4 overflow-auto">
           <div>
-            <label className="block text-gray-300 mb-2 font-medium">Username</label>
+            <label className="block text-gray-300 mb-1 font-medium text-sm">Username</label>
             <input
               type="text"
               className="input-field"
@@ -129,7 +121,7 @@ function Register() {
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2 font-medium">Email</label>
+            <label className="block text-gray-300 mb-1 font-medium text-sm">Email</label>
             <input
               type="email"
               className="input-field"
@@ -141,7 +133,7 @@ function Register() {
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2 font-medium">Password</label>
+            <label className="block text-gray-300 mb-1 font-medium text-sm">Password</label>
             <input
               type="password"
               className="input-field"
@@ -153,7 +145,7 @@ function Register() {
           </div>
 
           <div>
-            <label className="block text-gray-300 mb-2 font-medium">Confirm Password</label>
+            <label className="block text-gray-300 mb-1 font-medium text-sm">Confirm Password</label>
             <input
               type="password"
               className="input-field"
@@ -164,12 +156,12 @@ function Register() {
             />
           </div>
 
-          <button type="submit" className="w-full btn-primary">
+          <button type="submit" className="w-full btn-primary text-sm py-2">
             Register
           </button>
         </form>
 
-        <p className="text-sm text-gray-400 mt-6 text-center">
+        <p className="text-xs text-gray-400 mt-4 text-center">
           Already have an account?{" "}
           <Link
             to="/login"

@@ -139,77 +139,109 @@ export default function SessionHistory() {
 
       {/* ===================== Modal (Session Details) ===================== */}
       <AnimatePresence>
-        {selectedSession && (
-          <motion.div
-            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+  {selectedSession && (
+    <motion.div
+      className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="bg-gray-900/90 text-white border border-white/10 rounded-2xl shadow-2xl w-full max-w-3xl p-8 relative overflow-y-auto max-h-[90vh] backdrop-blur-md"
+      >
+        {/* Close Button */}
+        <button
+          onClick={() => setSelectedSession(null)}
+          className="absolute top-4 right-4 text-gray-400 hover:text-red-400 transition"
+        >
+          <FaTimes size={22} />
+        </button>
+
+        {/* Elegant Header */}
+        <div className="text-center mb-10">
+          <h2
+            className="text-4xl font-extrabold mb-3 text-transparent bg-clip-text 
+                       bg-gradient-to-r from-yellow-400 via-white to-blue-300 drop-shadow-lg"
           >
+            {selectedSession.role}
+          </h2>
+          <p className="text-sm text-gray-400">
+            🕒 {new Date(selectedSession.started_at).toLocaleString()}
+          </p>
+        </div>
+
+        {/* Content Sections */}
+        <div className="space-y-8 text-gray-100">
+          {/* Question */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-gradient-to-br from-blue-900/40 to-blue-800/10 p-6 rounded-2xl border border-blue-400/20 shadow-md hover:shadow-blue-500/30 transition-shadow"
+          >
+            <h3 className="text-2xl font-semibold text-blue-200 flex items-center gap-2 mb-3">
+              <FaQuestionCircle className="text-blue-400" /> <span className="text-white">Question</span>
+            </h3>
+            <div className="bg-gray-900/60 p-4 rounded-lg leading-relaxed backdrop-blur-sm text-gray-100">
+              <ReactMarkdown>{selectedSession.question}</ReactMarkdown>
+            </div>
+          </motion.div>
+
+          {/* Answer */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-gradient-to-br from-green-900/40 to-green-800/10 p-6 rounded-2xl border border-green-400/20 shadow-md hover:shadow-green-500/30 transition-shadow"
+          >
+            <h3 className="text-2xl font-semibold text-green-200 flex items-center gap-2 mb-3">
+              <FaPenNib className="text-green-400" /> <span className="text-white">Your Answer</span>
+            </h3>
+            <div className="bg-gray-900/60 p-4 rounded-lg text-gray-200 leading-relaxed whitespace-pre-wrap backdrop-blur-sm">
+              <ReactMarkdown>
+                {selectedSession.answer || "No answer recorded."}
+              </ReactMarkdown>
+            </div>
+          </motion.div>
+
+          {/* Feedback */}
+          {selectedSession.feedback && (
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-gray-900 text-white border border-white/20 rounded-2xl shadow-2xl w-full max-w-3xl p-6 relative overflow-y-auto max-h-[90vh]"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-gradient-to-br from-yellow-900/40 to-yellow-800/10 p-6 rounded-2xl border border-yellow-400/20 shadow-md hover:shadow-yellow-500/30 transition-shadow"
             >
-              <button
-                onClick={() => setSelectedSession(null)}
-                className="absolute top-3 right-3 text-gray-400 hover:text-red-400 transition"
-              >
-                <FaTimes size={20} />
-              </button>
-
-              <h2 className="text-2xl font-bold text-blue-400 mb-4 flex items-center gap-2">
-                <FaUserTie /> {selectedSession.role}
-              </h2>
-
-              <div className="space-y-5">
-                <div>
-                  <h3 className="text-lg font-semibold text-blue-300 flex items-center gap-2">
-                    <FaQuestionCircle /> Question
-                  </h3>
-                  <div className="bg-gray-800/50 p-4 rounded-lg text-gray-100">
-                    <ReactMarkdown>{selectedSession.question}</ReactMarkdown>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-semibold text-green-300 flex items-center gap-2">
-                    <FaPenNib /> Your Answer
-                  </h3>
-                  <div className="bg-gray-800/50 p-4 rounded-lg text-gray-200">
-                    <ReactMarkdown>
-                      {selectedSession.answer || "No answer recorded."}
-                    </ReactMarkdown>
-                  </div>
-                </div>
-
-                {selectedSession.feedback && (
-                  <div>
-                    <h3 className="text-lg font-semibold text-yellow-300 flex items-center gap-2">
-                      <FaCommentDots /> AI Feedback
-                    </h3>
-                    <div className="bg-gray-800/50 p-4 rounded-lg text-gray-200">
-                      <ReactMarkdown>{selectedSession.feedback}</ReactMarkdown>
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex items-center justify-center mt-6">
-                  <div
-                    className={`px-6 py-3 rounded-full text-lg font-bold border ${getScoreColor(
-                      selectedSession.score
-                    )} border-white/20 bg-white/5`}
-                  >
-                    🏆 Score: {selectedSession.score ?? "N/A"} / 10
-                  </div>
-                </div>
+              <h3 className="text-2xl font-semibold text-yellow-200 flex items-center gap-2 mb-3">
+                <FaCommentDots className="text-yellow-400" /> <span className="text-white">AI Feedback</span>
+              </h3>
+              <div className="bg-gray-900/60 p-4 rounded-lg text-gray-200 leading-relaxed whitespace-pre-wrap backdrop-blur-sm">
+                <ReactMarkdown>{selectedSession.feedback}</ReactMarkdown>
               </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+
+          {/* Final Score */}
+          <div className="flex items-center justify-center mt-8">
+            <div
+              className={`px-10 py-4 rounded-full text-lg font-bold border ${getScoreColor(
+                selectedSession.score
+              )} border-white/20 bg-gradient-to-r from-white/10 to-white/5 shadow-lg backdrop-blur-sm`}
+            >
+              🏆 Score: {selectedSession.score ?? "N/A"} / 10
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
     </div>
   );
 }

@@ -171,6 +171,8 @@ def session_history(request):
             "id": session.id,
             "role": session.role or "N/A",
             "question": question.text if question else "No question",
+            "answer":answer.text if answer else "No answer",
+            "feedback": answer.feedback if answer else "No feedback",
             "score": session.score or 0,
             "started_at": session.started_at,
         })
