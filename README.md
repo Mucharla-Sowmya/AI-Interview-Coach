@@ -79,7 +79,7 @@ ai-interview-coach/
 
 ### **Steps**
 
----
+
 
 ## 1️⃣ Clone the Repository
 ```bash
@@ -108,6 +108,8 @@ npm install
 npm start
 ---
 
+
+-----
 ## 🔑 Environment Variables
 
 ### 🐍 **Backend (.env)**
@@ -125,6 +127,7 @@ AZURE_OPENAI_ENDPOINT=https://your-endpoint.openai.azure.com/
 REACT_APP_API_BASE=http://127.0.0.1:8000/api
 ---
 
+-----
 ## 🧠 Example Roles
 
 - 🐍 **Python Developer**  
@@ -135,6 +138,7 @@ REACT_APP_API_BASE=http://127.0.0.1:8000/api
 
 ---
 
+-----
 ## 📈 Future Improvements
 
 ✨ **Voice-Based Interview Simulation** — Integrate Azure Speech-to-Text & Text-to-Speech for interactive mock interviews  
@@ -144,6 +148,7 @@ REACT_APP_API_BASE=http://127.0.0.1:8000/api
 
 ---
 
+------
 ## 👩‍💻 Author
 
 **Mucharla Sowmya**  
@@ -153,8 +158,10 @@ REACT_APP_API_BASE=http://127.0.0.1:8000/api
 
 ---
 
+-----
 ## 🧠 Inspiration
 
 > “This project was created to help developers practice real technical interviews using AI-driven insights — improving both confidence and performance before actual interviews.”
 
 ---
+-----
