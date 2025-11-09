@@ -4,13 +4,7 @@ An <b>AI-powered mock interview simulator</b> that helps users practice technica
 Built with <b>React (frontend)</b>, <b>Django REST Framework (backend)</b>, <b>MySQL</b>, and <b>Azure OpenAI</b> for intelligent question generation and feedback.
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Frontend-React-blue?style=flat-square&logo=react" />
-  <img src="https://img.shields.io/badge/Backend-Django-green?style=flat-square&logo=django" />
-  <img src="https://img.shields.io/badge/Database-MySQL-blue?style=flat-square&logo=mysql" />
-  <img src="https://img.shields.io/badge/AI-Azure%20OpenAI-purple?style=flat-square&logo=openai" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" />
-</p>
+
 
 ---
 
