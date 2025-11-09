@@ -80,7 +80,8 @@ ai-interview-coach/
 
 ## ⚙️ Setup Instructions
 
-### **1️⃣ Clone the Repository**
+### **Steps**
+## 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/Mucharla-Sowmya/AI-Interview-Coach.git
 cd AI-Interview-Coach
