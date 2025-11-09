@@ -79,7 +79,7 @@ ai-interview-coach/
 ```bash
 ### **Steps**
 
----
+
 
 ## 1️⃣ Clone the Repository
 ```bash
@@ -110,7 +110,6 @@ npm start
 
 ## 🔑 Environment Variables
 
-```bash
 ### 🐍 **Backend (.env)**
 ```env
 SECRET_KEY=your_django_secret
@@ -128,7 +127,6 @@ REACT_APP_API_BASE=http://127.0.0.1:8000/api
 
 ## 🧠 Example Roles
 
-```bash
 - 🐍 **Python Developer**  
 - ⚛️ **React Developer**  
 - 🤖 **Machine Learning Engineer**  
@@ -139,7 +137,6 @@ REACT_APP_API_BASE=http://127.0.0.1:8000/api
 
 ## 📈 Future Improvements
 
-```bash
 ✨ **Voice-Based Interview Simulation** — Integrate Azure Speech-to-Text & Text-to-Speech for interactive mock interviews  
 📊 **Leaderboard & Analytics Dashboard** — Visualize progress and compare user performance  
 📄 **Resume-Based Question Generation** — Generate custom interview questions from uploaded resumes  
@@ -149,7 +146,6 @@ REACT_APP_API_BASE=http://127.0.0.1:8000/api
 
 ## 👩‍💻 Author
 
-```bash
 **Mucharla Sowmya**  
 💼 *Full-Stack Developer | AI Enthusiast*  
 📧 [sowmyaoff209@gmail.com]  
@@ -159,7 +155,6 @@ REACT_APP_API_BASE=http://127.0.0.1:8000/api
 
 ## 🧠 Inspiration
 
-```bash
 > “This project was created to help developers practice real technical interviews using AI-driven insights — improving both confidence and performance before actual interviews.”
 
 ---
