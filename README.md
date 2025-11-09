@@ -76,10 +76,10 @@ ai-interview-coach/
 
 ## ⚙️ Setup Instructions
 
-```bash
+
 ### **Steps**
 
-
+---
 
 ## 1️⃣ Clone the Repository
 ```bash
