@@ -40,24 +40,26 @@ Built with <b>React (frontend)</b>, <b>Django REST Framework (backend)</b>, <b>M
 
 ## ⚙️ Project Structure
 
+```bash
 ai-interview-coach/
 │
 ├── backend/
-│ ├── api/
-│ ├── users/
-│ ├── interviews/
-│ ├── manage.py
-│ └── settings.py
+│   ├── api/
+│   ├── users/
+│   ├── interviews/
+│   ├── manage.py
+│   └── settings.py
 │
 ├── frontend/
-│ ├── src/
-│ │ ├── components/
-│ │ ├── pages/
-│ │ └── App.js
-│ └── package.json
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── App.js
+│   └── package.json
 │
 ├── venv/
 └── README.md
+
 
 ---
 
@@ -75,6 +77,9 @@ ai-interview-coach/
 ## ⚙️ Setup Instructions
 
 ### **Steps**
+
+---
+
 ## 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/Mucharla-Sowmya/AI-Interview-Coach.git
