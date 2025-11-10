@@ -5,7 +5,6 @@ from django.http import JsonResponse
 
 def root_view(request):
     return JsonResponse({"message": "Welcome to the Interview API!"})
-
 urlpatterns = [
     path("", root_view),  # Root URL
     path("admin/", admin.site.urls),
